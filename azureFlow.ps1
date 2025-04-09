@@ -3,9 +3,9 @@ Title: azureflow.ps1
 Author: Ryan McKenna, MSU Denver
 Date: 12/17/2024
 Version: 1.2
-Purpose: Runs following the tdxFlow.py script. Makes changes to the Intune and Azure device records according to the CSV outputted by the TDX script.
+Purpose: Launched by the tdxFlow.py script. Makes changes to Intune and Azure device records according to the CSV returned by the TDX script.
 Flow:
-    Supply a device ID and the appropriate groups and do the following:
+    Supply an asset name and the appropriate group names and do the following:
     1. Update device name
     2. Set primary user (if applicable)
     3. Update security group membership
@@ -13,11 +13,11 @@ Flow:
             a. If not, create on demand
             b. If yes, continue
         b. Check device's current group membership
-            a. Remove device from groups that do not match (only ones with "Intune - TDX" prefix)
+            a. Remove device from groups that do not match (only ones with "Intune - Win - " prefix)
             b. Add device to new groups
             c. Do nothing if device already in group
-    4. Update Intune notes field with current date and time
-Tip for readability: The below function "Sync-Groups" is called within the for loop at the bottom of this document. To understand the order of operations, begin with the for loop and return to Sync-Groups after.
+    4. Update Extension Attribute 1 with current date and time
+Tip for readability: The below function "Sync-Groups" is called within the for loop at the bottom of this document (line 140). To understand the order of operations, begin with the for loop and return to Sync-Groups after.
 #>
 
 # Start the transcript.
@@ -94,7 +94,7 @@ function Sync-Groups {
     Write-Host "---INFO:: FILTERING GROUPS---"
     foreach ($group in $currentDeviceGroups)
     {
-        $filteredGroupItem = Get-MgGroup -GroupId $group | Where-Object { $_.DisplayName.startsWith("Intune - Win") } | Select-Object -expandproperty DisplayName
+        $filteredGroupItem = Get-MgGroup -GroupId $group | Where-Object { $_.DisplayName.startsWith("Intune - Win - ") } | Select-Object -expandproperty DisplayName
 
         # The above command outputs blanks when the group isn't found. So we only add the group if it's not blank.
         if ($filteredGroupItem) {
@@ -118,7 +118,7 @@ function Sync-Groups {
         }
         else
         {
-            # Device already in group, skip.
+            Write-Host "---INFO:: DEVICE ALREADY IN GROUP: '$group'. SKIPPING---"
         }
     }
 

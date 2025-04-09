@@ -2,7 +2,7 @@
 Title: tdxflow.py
 Author: Ryan McKenna, MSU Denver
 Date: 5/10/2024
-Purpose: Retrieves data from a TeamDynamix report, parses it, and writes it to a CSV file. The CSV file is then used by a PowerShell script to trigger an Azure Flow.
+Purpose: Retrieves data from a TeamDynamix report, parses it, and writes it to a CSV file. Then, the script launches azureFlow.ps1 to do work in Intune and Azure AD.
 '''
 
 # Importing libraries

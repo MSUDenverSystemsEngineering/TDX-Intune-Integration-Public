@@ -1,4 +1,4 @@
-# TDX-Intune-Integration-Public
+# TDX Intune Integration Public
 This integration was built at MSU Denver to take information from our Windows device records in TeamDynamix Assets/CIs and bring it to Microsoft Intune in a meaningful way. Unlike preparing Windows machines with an SCCM task sequence and OSD FrontEnd, Microsoft Intune provides no way easy to decide how a device will be provisioned ahead of time. Group tags exist, but we didn't like that it's a write-in field and mistakes could be made easily. Additionally, since we manage over 300 classrooms, labs and shared spaces, manually creating an Entra group for each space felt like a burden, especially knowing that things change frequently on our shared campus. Since we already maintained an asset management database in TeamDynamix, we felt it was only natural to pull information from there. This way, a technican need only update the asset record in TDX and the device records in Intune and Entra would fall in line.
 ## Who this is for
 Your organization:

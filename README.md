@@ -56,7 +56,9 @@ Your organization:
 ![Screenshot 2025-04-09 090745](https://github.com/user-attachments/assets/97aa381e-fc2f-47af-9a8b-9d89a9d13db9)
 
 Program/script: "pwsh.exe"
+
 Add arguments: "-Command python tdxFlow.py"
+
 Start in: "C:\Integrations\TDX-Intune-Integration\TDX-MDM-Integration\"
 - [ ] Copy down the files from this repo into the folder specified above.
 - [ ] Modify the two scripts to include your authentication information from the previous steps.

@@ -16,7 +16,6 @@ Your organization:
 1. Runs a report that shows TDX assets modified in the last 5 minutes with heavy filtering.
 2. Takes information from each asset in the report results and adds it to a CSV.
 ## How to set up the integration
-Identify a machine that you want the integration to run on. Ideally, this is a virtual Windows machine that is always on.
 ### Microsoft Graph
 - [ ] Create an application registraion according to Microsoft's directions: [Build PowerShell scripts with Microsoft Graph and app-only authentication](https://learn.microsoft.com/en-us/graph/tutorials/powershell-app-only?tabs=windows).
 - [ ] Grant the app registration the following permissions with admin consent:
@@ -31,4 +30,13 @@ Identify a machine that you want the integration to run on. Ideally, this is a v
 ### TeamDynamix
 - [ ] Retreive the WebServicesKey and BEID of the API User in TDX. Ensure it has full admin permissions on the Assets/CIs app.
 - [ ] We use two fields to record the room number of an asset: the built-in *LocationRoomName* field and a custom built write-in option called *Room Number* because we don't have good data on all the spaces on our campus. You may not need this. Feel free to remove lines 84 through 86 of the tdxFlow.py if that is the case.
-- [ ] Set up the report 
+- [ ] Create an Assets/CIs report that looks like this:
+
+![image](https://github.com/user-attachments/assets/71b4ebcf-4efc-4018-a615-85e7ba6ff656)
+
+### Server Setup
+- [ ] Identify a machine that you want the integration to run on. Ideally, this is a virtual Windows machine that is always on.
+- [ ] Install the certificate to the computer store on your integration machine. Use the default location. The certificate should be named 'PowerShell App-Only' but can be renamed in the script.
+- [ ] Install PowerShell 7. This can be used with PowerShell 5, but I found PowerShell 7 works better.
+- [ ] Install Python
+- [ ] Create a scheduled task to run tdxFlow.py 
